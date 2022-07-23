@@ -3,12 +3,12 @@ import 'package:funda_assignment/src/infrastructure/models/prijs.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'commodity.g.dart';
+part 'search_object.g.dart';
 
 @immutable
 @JsonSerializable()
-class Commodity {
-  const Commodity(
+class SearchObject {
+  const SearchObject(
     this.id,
     this.globalId,
     this.koopprijs,
@@ -29,11 +29,11 @@ class Commodity {
     this.prijs,
   );
 
-  factory Commodity.fromJson(Map<String, dynamic> json) {
-    return _$CommodityFromJson(json);
+  factory SearchObject.fromJson(Map<String, dynamic> json) {
+    return _$SearchObjectFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$CommodityToJson(this);
+  Map<String, dynamic> toJson() => _$SearchObjectToJson(this);
 
   final String id;
   final int globalId;

@@ -1,18 +1,12 @@
 import 'package:flutter/foundation.dart';
 
-/// Reason why an api request failed.
-enum FailureType {
-  badRequest,
-  serverError,
-  insufficientPermission,
-  unknown,
-}
-
 /// Contains information about a failed api requests.
 @immutable
 class Failure {
-  const Failure(this.failureType, this.message);
+  const Failure([this.message = '']);
 
-  final FailureType failureType;
+  const Failure.noData() : this('Response contained no data.');
+  const Failure.unknown() : this('Unknown error.');
+
   final String message;
 }

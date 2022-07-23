@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funda_assignment/src/infrastructure/models/prijs.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'object_detail.g.dart';
@@ -40,4 +41,11 @@ class ObjectDetail {
   final String bouwjaar;
   final Prijs prijs;
   final String verkoopStatus;
+
+  String get formattedPrice =>
+      '${NumberFormat.simpleCurrency(locale: 'nl_NL').format(prijs.koopprijs)} '
+      '${prijs.koopAbbreviation}';
+
+  String get formattedOppervlakte =>
+      '$woonOppervlakte \u33a1 / $perceelOppervlakte \u33a1';
 }

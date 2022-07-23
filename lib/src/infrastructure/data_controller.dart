@@ -4,7 +4,24 @@ import 'package:funda_assignment/src/infrastructure/models/failure.dart';
 import 'package:funda_assignment/src/infrastructure/models/object_detail.dart';
 import 'package:funda_assignment/src/infrastructure/models/search_response.dart';
 
-/// Responsible for all interactions with the Funda api.
+/// Responsible for all interactions with the Funda partner API.
+///
+/// All methods return an [Either] where [Either.left] is a [Failure] and
+/// [Either.right] is the result of the API call. This forces the call site
+/// to handle all possible cases. If errors where handled by throwing the
+/// caller could forget to wrap the call in a try/catch block and handle the
+/// appropriate error.
+///
+/// Results can be extracted by using [Either.match].
+/// ```dart
+/// apiResult.match(
+///   (error) { // handle error },
+///   (result) { // handle data },
+/// );
+/// ```
+///
+/// A [Dio] api client can be optionally passed in to setup testing. If one is
+/// not provided the [DataController] will create it's own [Dio] instance.
 class DataController {
   DataController([Dio? apiClient]) : _apiClient = apiClient ?? Dio();
 
@@ -13,6 +30,7 @@ class DataController {
 
   final Dio _apiClient;
 
+  /// Performs a search request against the Funda partner API.
   Future<Either<Failure, SearchResponse>> search(String term) async {
     try {
       final response = await _apiClient.get<Map<String, dynamic>>(
@@ -24,16 +42,17 @@ class DataController {
       );
 
       if (response.data == null) {
-        return left(const Failure(FailureType.unknown, 'No data returned.'));
+        return left(const Failure.noData());
       }
 
       final model = SearchResponse.fromJson(response.data!);
       return right(model);
     } on DioError {
-      return left(const Failure(FailureType.unknown, 'Unknown error'));
+      return left(const Failure.unknown());
     }
   }
 
+  /// Gets the details of a specific object found via [search].
   Future<Either<Failure, ObjectDetail>> fetchObject(String id) async {
     try {
       final response = await _apiClient.get<Map<String, dynamic>>(
@@ -41,13 +60,13 @@ class DataController {
       );
 
       if (response.data == null) {
-        return left(const Failure(FailureType.unknown, 'No data returned.'));
+        return left(const Failure.noData());
       }
 
       final model = ObjectDetail.fromJson(response.data!);
       return right(model);
     } on DioError {
-      return left(const Failure(FailureType.unknown, 'Unknown error'));
+      return left(const Failure.unknown());
     }
   }
 }

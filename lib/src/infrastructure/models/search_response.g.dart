@@ -10,7 +10,7 @@ SearchResponse _$SearchResponseFromJson(Map<String, dynamic> json) =>
     SearchResponse(
       json['TotaalAantalObjecten'] as int,
       (json['Objects'] as List<dynamic>)
-          .map((e) => Commodity.fromJson(e as Map<String, dynamic>))
+          .map((e) => SearchObject.fromJson(e as Map<String, dynamic>))
           .toList(),
       Paging.fromJson(json['Paging'] as Map<String, dynamic>),
     );

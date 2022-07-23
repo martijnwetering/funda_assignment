@@ -4,25 +4,14 @@ analyzer:
   exclude:
     - "**/*.mocks.dart"
     - "**/*.g.dart"
-    - "**/*.gr.dart"
-    - "**/*.freezed.dart"
   plugins:
     - dart_code_metrics
 
 linter:
   rules:
+    # Disabled because it seems a bit overkill for non open-source projects.
+    # You should still provide adequate documentation on features.
     public_member_api_docs: false
-    use_super_parameters: true
-#    flutter_style_todos: false
-#    always_put_required_named_parameters_first: true
-#    sort_constructors_first: true
-#    prefer_single_quotes: true
-#    sort_pub_dependencies: true
-#    always_use_package_imports: false
-#    prefer_relative_imports: true
-#    depend_on_referenced_packages: false
-#    avoid_classes_with_only_static_members: false
-
 
 dart_code_metrics:
   anti-patterns:
@@ -40,6 +29,5 @@ dart_code_metrics:
     - prefer-trailing-comma
     - prefer-conditional-expressions
     - no-equal-then-else
-    # - no-empty-block
   rules-exclude:
     - test/**

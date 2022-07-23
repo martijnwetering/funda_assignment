@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'commodity.dart';
+part of 'search_object.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Commodity _$CommodityFromJson(Map<String, dynamic> json) => Commodity(
+SearchObject _$SearchObjectFromJson(Map<String, dynamic> json) => SearchObject(
       json['Id'] as String,
       json['GlobalId'] as int,
       json['Koopprijs'] as int,
@@ -27,7 +27,8 @@ Commodity _$CommodityFromJson(Map<String, dynamic> json) => Commodity(
       Prijs.fromJson(json['Prijs'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$CommodityToJson(Commodity instance) => <String, dynamic>{
+Map<String, dynamic> _$SearchObjectToJson(SearchObject instance) =>
+    <String, dynamic>{
       'Id': instance.id,
       'GlobalId': instance.globalId,
       'Koopprijs': instance.koopprijs,

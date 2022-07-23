@@ -7,23 +7,18 @@ import 'package:funda_assignment/src/presentation/detail_page.dart';
 import 'package:funda_assignment/src/presentation/search_page.dart';
 import 'package:funda_assignment/src/providers/object_detail_provider.dart';
 import 'package:funda_assignment/src/providers/search_provider.dart';
-import 'package:funda_assignment/src/settings/settings_controller.dart';
 import 'package:provider/provider.dart';
 
-/// The Widget that configures your application.
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
-    required this.settingsController,
   });
-
-  final SettingsController settingsController;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      restorationScopeId: 'app',
+      restorationScopeId: 'com.mdvdw.funda_assignment',
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -34,8 +29,6 @@ class MyApp extends StatelessWidget {
         Locale('nl', ''),
       ],
       theme: appTheme,
-      darkTheme: ThemeData.dark(),
-      themeMode: settingsController.themeMode,
       routes: {
         '/': (_) => ChangeNotifierProvider(
               create: (_) => SearchProvider(DataController()),
@@ -43,6 +36,8 @@ class MyApp extends StatelessWidget {
             ),
         DetailPage.route: (context) => ChangeNotifierProvider(
               create: (_) {
+                // The search request is started here. This way the details
+                // page only needs to know how to render the data it's given.
                 final id =
                     ModalRoute.of(context)!.settings.arguments! as String;
                 return ObjectDetailProvider(DataController())..fetchObject(id);

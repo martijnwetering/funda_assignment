@@ -1,6 +1,6 @@
 {
   "@@locale": "nl",
-  "search": "Zoek koopwoning...",
+  "search": "Plaats, buurt, etc.",
   "@search": {
     "description": "Label text for search text field."
   },
@@ -19,5 +19,17 @@
   "video": "Video",
   "@video": {
     "description": "Play video icon text on details page."
+  },
+  "startSearching": "Vul een plaats of buurt in en begin met zoeken van koopwoningen.",
+  "@startSearching": {
+    "description": "Starter text when there are no search results yet."
+  },
+  "tryAgain": "Oops! er ging iets mis. Probeer het later nog een keer.",
+  "@tryAgain": {
+    "description": "Generic error message asking user to try again."
+  },
+  "description": "Omschrijving",
+  "@description": {
+    "description": "Header description text."
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:funda_assignment/src/infrastructure/models/commodity.dart';
+import 'package:funda_assignment/src/infrastructure/models/search_object.dart';
 import 'package:funda_assignment/src/infrastructure/models/paging.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -21,6 +21,6 @@ class SearchResponse {
   Map<String, dynamic> toJson() => _$SearchResponseToJson(this);
 
   final int totaalAantalObjecten;
-  final List<Commodity> objects;
+  final List<SearchObject> objects;
   final Paging paging;
 }

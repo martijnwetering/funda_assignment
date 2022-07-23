@@ -2,8 +2,9 @@ import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
 import 'package:funda_assignment/src/infrastructure/data_controller.dart';
-import 'package:funda_assignment/src/infrastructure/models/commodity.dart';
+import 'package:funda_assignment/src/infrastructure/models/search_object.dart';
 
+/// Responsible for executing search requests against the Funda partner api.
 class SearchProvider extends ChangeNotifier {
   SearchProvider(this._dataController);
 
@@ -11,7 +12,7 @@ class SearchProvider extends ChangeNotifier {
 
   bool loading = false;
   String error = '';
-  List<Commodity> objects = UnmodifiableListView([]);
+  List<SearchObject> objects = UnmodifiableListView([]);
 
   bool get hasError => error.isNotEmpty;
 
@@ -20,17 +21,17 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
 
     final result = await _dataController.search(term);
+    loading = false;
     result.match(
       (failure) {
-        loading = false;
         error = failure.message;
-        notifyListeners();
       },
       (searchResponse) {
-        loading = false;
+        error = '';
         objects = UnmodifiableListView(searchResponse.objects);
-        notifyListeners();
       },
     );
+
+    notifyListeners();
   }
 }

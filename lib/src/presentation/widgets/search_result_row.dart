@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funda_assignment/src/extensions/build_context_extensions.dart';
-import 'package:funda_assignment/src/infrastructure/models/commodity.dart';
+import 'package:funda_assignment/src/infrastructure/models/search_object.dart';
 
 class SearchResultRow extends StatelessWidget {
   const SearchResultRow({
@@ -9,7 +9,7 @@ class SearchResultRow extends StatelessWidget {
     required this.onTap,
   });
 
-  final Commodity object;
+  final SearchObject object;
   final VoidCallback onTap;
 
   @override
@@ -54,7 +54,7 @@ class _ObjectDescription extends StatelessWidget {
     required this.object,
   });
 
-  final Commodity object;
+  final SearchObject object;
 
   @override
   Widget build(BuildContext context) {
