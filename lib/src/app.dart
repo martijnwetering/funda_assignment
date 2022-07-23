@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:funda_assignment/src/config/app_theme.dart';
+import 'package:funda_assignment/src/infrastructure/data_controller.dart';
+import 'package:funda_assignment/src/presentation/detail_page.dart';
 import 'package:funda_assignment/src/presentation/search_page.dart';
-import 'package:funda_assignment/src/sample_feature/sample_item_details_view.dart';
-import 'package:funda_assignment/src/sample_feature/sample_item_list_view.dart';
+import 'package:funda_assignment/src/providers/object_detail_provider.dart';
+import 'package:funda_assignment/src/providers/search_provider.dart';
 import 'package:funda_assignment/src/settings/settings_controller.dart';
-import 'package:funda_assignment/src/settings/settings_view.dart';
+import 'package:provider/provider.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -18,38 +21,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Glue the SettingsController to the MaterialApp.
-    //
-    // The AnimatedBuilder Widget listens to the SettingsController for changes.
-    // Whenever the user updates their settings, the MaterialApp is rebuilt.
-    return AnimatedBuilder(
-      animation: settingsController,
-      builder: (BuildContext context, Widget? child) {
-        return MaterialApp(
-          restorationScopeId: 'app',
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en', ''),
-          ],
-          onGenerateTitle: (BuildContext context) =>
-              AppLocalizations.of(context)!.appTitle,
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
-          themeMode: settingsController.themeMode,
-          onGenerateRoute: (RouteSettings routeSettings) {
-            return MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (BuildContext context) {
-                return const SearchPage();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      restorationScopeId: 'app',
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('nl', ''),
+      ],
+      theme: appTheme,
+      darkTheme: ThemeData.dark(),
+      themeMode: settingsController.themeMode,
+      routes: {
+        '/': (_) => ChangeNotifierProvider(
+              create: (_) => SearchProvider(DataController()),
+              child: const SearchPage(),
+            ),
+        DetailPage.route: (context) => ChangeNotifierProvider(
+              create: (_) {
+                final id =
+                    ModalRoute.of(context)!.settings.arguments! as String;
+                return ObjectDetailProvider(DataController())..fetchObject(id);
               },
-            );
-          },
-        );
+              child: const DetailPage(),
+            ),
       },
     );
   }

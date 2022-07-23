@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:funda_assignment/src/infrastructure/models/failure.dart';
+import 'package:funda_assignment/src/infrastructure/models/object_detail.dart';
 import 'package:funda_assignment/src/infrastructure/models/search_response.dart';
 
 /// Responsible for all interactions with the Funda api.
@@ -18,7 +19,7 @@ class DataController {
         '$_baseUrl/feeds/Aanbod.svc/json/$_apiKey/',
         queryParameters: {
           'type': 'koop',
-          'zo': '/amsterdam/+10km/',
+          'zo': '/$term/+10km/',
         },
       );
 
@@ -28,8 +29,25 @@ class DataController {
 
       final model = SearchResponse.fromJson(response.data!);
       return right(model);
-    } on DioError catch (error) {
-      return left(const Failure(FailureType.unknown, 'No data returned.'));
+    } on DioError {
+      return left(const Failure(FailureType.unknown, 'Unknown error'));
+    }
+  }
+
+  Future<Either<Failure, ObjectDetail>> fetchObject(String id) async {
+    try {
+      final response = await _apiClient.get<Map<String, dynamic>>(
+        '$_baseUrl/feeds/Aanbod.svc/json/detail/$_apiKey/koop/$id/',
+      );
+
+      if (response.data == null) {
+        return left(const Failure(FailureType.unknown, 'No data returned.'));
+      }
+
+      final model = ObjectDetail.fromJson(response.data!);
+      return right(model);
+    } on DioError {
+      return left(const Failure(FailureType.unknown, 'Unknown error'));
     }
   }
 }

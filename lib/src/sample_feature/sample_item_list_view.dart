@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
-import '../settings/settings_view.dart';
-import 'sample_item.dart';
-import 'sample_item_details_view.dart';
+import 'package:funda_assignment/src/sample_feature/sample_item.dart';
+import 'package:funda_assignment/src/sample_feature/sample_item_details_view.dart';
+import 'package:funda_assignment/src/settings/settings_view.dart';
 
 /// Displays a list of SampleItems.
 class SampleItemListView extends StatelessWidget {
   const SampleItemListView({
-    Key? key,
+    super.key,
     this.items = const [SampleItem(1), SampleItem(2), SampleItem(3)],
-  }) : super(key: key);
+  });
 
   static const routeName = '/';
 
@@ -62,7 +61,7 @@ class SampleItemListView extends StatelessWidget {
                 context,
                 SampleItemDetailsView.routeName,
               );
-            }
+            },
           );
         },
       ),

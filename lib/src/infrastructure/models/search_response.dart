@@ -14,13 +14,13 @@ class SearchResponse {
     this.paging,
   );
 
-  final int totaalAantalObjecten;
-  final List<Commodity> objects;
-  final Paging paging;
-
   factory SearchResponse.fromJson(Map<String, dynamic> json) {
     return _$SearchResponseFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$SearchResponseToJson(this);
+
+  final int totaalAantalObjecten;
+  final List<Commodity> objects;
+  final Paging paging;
 }

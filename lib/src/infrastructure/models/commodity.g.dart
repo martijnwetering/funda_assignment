@@ -23,6 +23,7 @@ Commodity _$CommodityFromJson(Map<String, dynamic> json) => Commodity(
       json['Perceeloppervlakte'] as int,
       json['Woonoppervlakte'] as int,
       json['Woonplaats'] as String,
+      json['Postcode'] as String,
       Prijs.fromJson(json['Prijs'] as Map<String, dynamic>),
     );
 
@@ -43,5 +44,6 @@ Map<String, dynamic> _$CommodityToJson(Commodity instance) => <String, dynamic>{
       'Perceeloppervlakte': instance.perceeloppervlakte,
       'Woonoppervlakte': instance.woonoppervlakte,
       'Woonplaats': instance.woonplaats,
+      'Postcode': instance.postcode,
       'Prijs': instance.prijs.toJson(),
     };

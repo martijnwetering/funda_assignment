@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:funda_assignment/src/infrastructure/models/prijs.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'commodity.g.dart';
@@ -24,8 +25,15 @@ class Commodity {
     this.perceeloppervlakte,
     this.woonoppervlakte,
     this.woonplaats,
+    this.postcode,
     this.prijs,
   );
+
+  factory Commodity.fromJson(Map<String, dynamic> json) {
+    return _$CommodityFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$CommodityToJson(this);
 
   final String id;
   final int globalId;
@@ -43,11 +51,13 @@ class Commodity {
   final int perceeloppervlakte;
   final int woonoppervlakte;
   final String woonplaats;
+  final String postcode;
   final Prijs prijs;
 
-  factory Commodity.fromJson(Map<String, dynamic> json) {
-    return _$CommodityFromJson(json);
-  }
+  String get formattedPrice =>
+      '${NumberFormat.simpleCurrency(locale: 'nl_NL').format(prijs.koopprijs)} '
+      '${prijs.koopAbbreviation}';
 
-  Map<String, dynamic> toJson() => _$CommodityToJson(this);
+  String get formattedOppervlakte =>
+      '$woonoppervlakte \u33a1 / $perceeloppervlakte \u33a1';
 }

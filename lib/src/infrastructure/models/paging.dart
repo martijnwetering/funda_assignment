@@ -13,14 +13,14 @@ class Paging {
     this.vorigeUrl,
   );
 
-  final int aantalPaginas;
-  final int huidigePagina;
-  final String? volgendeUrl;
-  final String? vorigeUrl;
-
   factory Paging.fromJson(Map<String, dynamic> json) {
     return _$PagingFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$PagingToJson(this);
+
+  final int aantalPaginas;
+  final int huidigePagina;
+  final String? volgendeUrl;
+  final String? vorigeUrl;
 }

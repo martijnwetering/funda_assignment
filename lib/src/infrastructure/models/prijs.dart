@@ -13,14 +13,14 @@ class Prijs {
     this.huurAbbreviation,
   );
 
-  final String? koopAbbreviation;
-  final int? koopprijs;
-  final int? huurprijs;
-  final String? huurAbbreviation;
-
   factory Prijs.fromJson(Map<String, dynamic> json) {
     return _$PrijsFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$PrijsToJson(this);
+
+  final String? koopAbbreviation;
+  final int? koopprijs;
+  final int? huurprijs;
+  final String? huurAbbreviation;
 }

@@ -1,0 +1,23 @@
+{
+  "@@locale": "nl",
+  "search": "Zoek koopwoning...",
+  "@search": {
+    "description": "Label text for search text field."
+  },
+  "rooms": "kamers",
+  "@rooms": {
+    "description": "To describe number of rooms in search results."
+  },
+  "floorPlan": "Plattegrond",
+  "@floorPlan": {
+    "description": "Floor plan icon text on details page."
+  },
+  "threesixty": "360\u00b0",
+  "@threesixty": {
+    "description": "3D model icon text on details page."
+  },
+  "video": "Video",
+  "@video": {
+    "description": "Play video icon text on details page."
+  }
+}
