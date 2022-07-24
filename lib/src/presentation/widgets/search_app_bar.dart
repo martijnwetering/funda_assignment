@@ -49,6 +49,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                     horizontal: 30,
                   ),
                   child: TextField(
+                    key: const ValueKey('search'),
                     controller: _searchTextController,
                     focusNode: _searchFocusNode,
                     decoration: InputDecoration(

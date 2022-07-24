@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,10 +10,13 @@ import 'package:funda_assignment/src/providers/object_detail_provider.dart';
 import 'package:funda_assignment/src/providers/search_provider.dart';
 import 'package:provider/provider.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({
+class FundaAssignmentApp extends StatelessWidget {
+  const FundaAssignmentApp({
     super.key,
+    this.apiClient,
   });
+
+  final Dio? apiClient;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: appTheme,
       routes: {
         '/': (_) => ChangeNotifierProvider(
-              create: (_) => SearchProvider(DataController()),
+              create: (_) => SearchProvider(DataController(apiClient)),
               child: const SearchPage(),
             ),
         DetailPage.route: (context) => ChangeNotifierProvider(
@@ -40,7 +44,8 @@ class MyApp extends StatelessWidget {
                 // page only needs to know how to render the data it's given.
                 final id =
                     ModalRoute.of(context)!.settings.arguments! as String;
-                return ObjectDetailProvider(DataController())..fetchObject(id);
+                return ObjectDetailProvider(DataController(apiClient))
+                  ..fetchObject(id);
               },
               child: const DetailPage(),
             ),

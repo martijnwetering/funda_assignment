@@ -37,7 +37,7 @@ class DataController {
         '$_baseUrl/feeds/Aanbod.svc/json/$_apiKey/',
         queryParameters: {
           'type': 'koop',
-          'zo': '/$term/+10km/',
+          'zo': '/${term.toLowerCase()}/+10km/',
         },
       );
 
