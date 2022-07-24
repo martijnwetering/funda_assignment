@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:funda_assignment/src/extensions/build_context_extensions.dart';
 import 'package:funda_assignment/src/presentation/widgets/detail_page_app_bar.dart';
 import 'package:funda_assignment/src/presentation/widgets/detail_page_main_actions.dart';

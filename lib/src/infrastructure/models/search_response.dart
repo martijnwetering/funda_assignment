@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:funda_assignment/src/infrastructure/models/search_object.dart';
 import 'package:funda_assignment/src/infrastructure/models/paging.dart';
+import 'package:funda_assignment/src/infrastructure/models/search_object.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'search_response.g.dart';
